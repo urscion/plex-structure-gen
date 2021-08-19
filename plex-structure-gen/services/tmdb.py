@@ -52,29 +52,33 @@ class TmdbProvider(MediaDataProvider):
         shows = []
         for s in search.results:
             show_item = tmdb.TV(s["id"])
-            logger.info(f"{show_item.info()}")
-            show = Show(
-                name=s["name"],
-                year=s["first_air_date"].split("-")[0],
-                source=self.tag(),
-                source_id=show_item.id,
-            )
-            for season in show_item.info()["seasons"]:
-                try:
-                    show.seasons.append(
-                        Season(
-                            name=season["name"],
-                            number=season["season_number"],
-                            year=season["air_date"].split("-")[0],
-                            source=self.tag(),
-                            source_id=season["id"],
+            try:
+                show = Show(
+                    name=s["name"],
+                    year=s["first_air_date"].split("-")[0],
+                    source=self.tag(),
+                    source_id=show_item.id,
+                )
+                for season in show_item.info()["seasons"]:
+                    try:
+                        show.seasons.append(
+                            Season(
+                                name=season["name"],
+                                number=season["season_number"],
+                                year=season["air_date"].split("-")[0],
+                                source=self.tag(),
+                                source_id=season["id"],
+                            )
                         )
-                    )
-                except AttributeError:
-                    logger.exception(
-                        f"Skipping Season {season['season_number']} of {show.name}."
-                    )
-            shows.append(show)
+                    except (AttributeError, KeyError):
+                        logger.exception(
+                            f"Skipping Season {season['season_number']} of {show.name}."
+                        )
+                shows.append(show)
+            except (AttributeError, KeyError):
+                logger.exception(
+                    f"Skipping Show {show_item.info()['name']}: {show_item.info()}"
+                )
         return shows
 
     def tag(self) -> str:

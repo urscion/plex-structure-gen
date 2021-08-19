@@ -49,7 +49,7 @@ class MediaCollection(LibraryItem, metaclass=ABCMeta):
         if isinstance(item, media_item.Movie):
             return Movie(
                 name=item.name,
-                year=item.name,
+                year=item.year,
                 source=item.source,
                 source_id=item.source_id,
             )

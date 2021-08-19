@@ -4,7 +4,9 @@ Plex Structure Generator builds a file structure to meet Plex suggested formatti
 
 ## Plex Formatting rules
 [Movies](https://support.plex.tv/articles/naming-and-organizing-your-movie-media-files/)
+
 [TV Shows](https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/)
+
 [Media Assets](https://support.plex.tv/articles/200220677-local-media-assets-movies/)
 
 ## Data Providers
