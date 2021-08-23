@@ -1,39 +1,61 @@
 from __future__ import annotations
 
-from abc import ABC
+from abc import ABC, ABCMeta, abstractmethod
 from dataclasses import dataclass, field
 
 
 @dataclass
-class MediaItem(ABC):
-    name: str
-    year: str
-    source: str
-    source_id: str
-
+class MediaItem(metaclass=ABCMeta):
     @property
     def display_name(self) -> str:
         return f"{self.name} ({self.year})"
 
+    @property
+    @abstractmethod
+    def name(self):
+        """Media name"""
+
+    @property
+    @abstractmethod
+    def year(self):
+        """Media year"""
+
+    @property
+    @abstractmethod
+    def source(self):
+        """Media source"""
+
+    @property
+    @abstractmethod
+    def source_id(self):
+        """Media source_id"""
+
 
 @dataclass
-class Movie(MediaItem):
+class Movie(MediaItem, metaclass=ABCMeta):
     """Movie"""
 
 
 @dataclass
-class Show(MediaItem):
+class Show(MediaItem, metaclass=ABCMeta):
     """TV Show"""
 
     seasons: list[Season] = field(default_factory=list)
 
 
 @dataclass
-class Season(MediaItem):
+class Season(MediaItem, metaclass=ABCMeta):
     """TV Season"""
 
-    number: int
-    episodes: list[Episode] = field(default_factory=list)
+    @property
+    @abstractmethod
+    def number(self) -> int:
+        """Season number"""
+
+    @property
+    @abstractmethod
+    def episodes(self) -> list[Episode]:
+        """Episodes"""
 
 
 @dataclass
