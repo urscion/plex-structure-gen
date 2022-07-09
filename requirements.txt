@@ -1,6 +1,8 @@
 black==21.7b0
-PySide2==5.15.2
+PySide2==5.15.2.1
 flake8==3.9.2
 tmdbsimple==2.8.0
 mypy==0.910
+pillow==9.2.0
 pytest==6.2.4
+pyinstaller==4.5.1
