@@ -154,7 +154,7 @@ class AddMediaDialog(QDialog, Ui_AddMediaDialog):
             try:
                 buffer = io.BytesIO()
                 img = Image.open(io.BytesIO(data))
-                thumb_size = (100, int(img.size[1] * (100 / img.size[0])))
+                thumb_size = (300, int(img.size[1] * (300 / img.size[0])))
                 img = img.resize(thumb_size)
                 img.save(buffer, format="PNG")
                 item.setToolTip(f"<img src='data:image/png;base64,"

@@ -14,12 +14,12 @@ class MediaItem(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def name(self):
+    def name(self) -> str:
         """Media name"""
 
     @property
     @abstractmethod
-    def year(self):
+    def year(self) -> int:
         """Media year"""
 
     @property
@@ -31,6 +31,11 @@ class MediaItem(metaclass=ABCMeta):
     @abstractmethod
     def source_id(self):
         """Media source_id"""
+
+    @property
+    @abstractmethod
+    def poster_url(self):
+        """Media poster"""
 
 
 class Movie(MediaItem, metaclass=ABCMeta):

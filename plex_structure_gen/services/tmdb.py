@@ -73,12 +73,12 @@ class TmdbShow(Show, TmdbItemMixIn):
                 )
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self._data["name"]
 
     @property
-    def year(self):
-        return self._data["first_air_date"].split("-")[0]
+    def year(self) -> int:
+        return int(self._data["first_air_date"].split("-")[0])
 
 
 @dataclass
@@ -88,8 +88,8 @@ class TmdbSeason(Season, TmdbItemMixIn):
         return self._data["name"]
 
     @property
-    def year(self):
-        return self._data["air_date"].split("-")[0]
+    def year(self) -> int:
+        return int(self._data["air_date"].split("-")[0])
 
     @property
     def number(self) -> int:
